@@ -3,6 +3,8 @@ import ArticleList from './ArticleList'
 import axios from 'axios';
 import { useState, useEffect } from 'react'
 
+import { getArticles } from '../../utils/utils'
+
 
 //STATES CREATED HERE:
 //articles
@@ -18,11 +20,7 @@ export default function ArticleManager ({ topics }) {
 
     //fetch of all articles
     useEffect(() => {
-        axios
-        .get('https://ncnews-lh66.onrender.com/api/articles')
-        .then((response) => {
-          return response.data.articles
-        })
+        getArticles()
         .then((response) => {
           setArticles(response)
         })
