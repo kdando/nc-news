@@ -24,7 +24,7 @@ export default function ArticlePreviewCard ({ article }) {
 
     return (
         <>
-        <p>{title} by {author}</p>
+        <h3>{title} by {author}</h3>
         <p>on {parsedDate}</p>
         <img src={article_img_url} />
         <p>COMMENTS: {comment_count} VOTES: {votes}</p>
