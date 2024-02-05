@@ -27,9 +27,6 @@ const [topics, setTopics] = useState([]);
     .then((response) => {
       setTopics(response)
     })
-    .then(() => {
-      console.log(topics, "<<<<CURRENT TOPICS")
-    })
   }, [])
 
 

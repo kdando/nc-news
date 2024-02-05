@@ -26,9 +26,6 @@ export default function ArticleManager ({ topics }) {
         .then((response) => {
           setArticles(response)
         })
-        .then(() => {
-          console.log(articles, "<<<<CURRENT articles")
-        })
       }, [])
 
     return (
