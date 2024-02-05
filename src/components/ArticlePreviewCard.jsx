@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 
 //STATES NEEDED HERE:
 //articles
@@ -5,6 +6,7 @@
 export default function ArticlePreviewCard ({ article }) {
 
     const {
+        article_id,
         title,
         author,
         topic,
@@ -24,10 +26,12 @@ export default function ArticlePreviewCard ({ article }) {
 
     return (
         <>
+        <Link to={`/${article_id}`}>
         <h3>{title} by {author}</h3>
         <p>on {parsedDate}</p>
         <img src={article_img_url} />
         <p>COMMENTS: {comment_count} VOTES: {votes}</p>
+        </Link>
         </>
     )
 

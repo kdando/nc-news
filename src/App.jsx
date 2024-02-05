@@ -9,6 +9,7 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header'
 import Navigation from './components/Navigation'
 import ArticleManager from './components/ArticleManager'
+import ArticleFullCard from './components/ArticleFullCard'
 
 //STATES CREATED HERE:
 //topics, filterQueries
@@ -39,6 +40,7 @@ const [topics, setTopics] = useState([]);
       </header>
       <Routes>
         <Route path='/' element={<ArticleManager topics={topics}/>} />
+        <Route path='/:article_id' element={<ArticleFullCard />} />
       </Routes>
     </>
   )
