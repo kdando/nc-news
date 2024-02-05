@@ -3,11 +3,13 @@ import './App.css'
 //axios and react parts
 import axios from 'axios';
 import { useState, useEffect } from 'react'
+import { Routes, Route } from 'react-router-dom';
 
 //Components
 import Header from './components/Header'
 import Navigation from './components/Navigation'
 import ArticleManager from './components/ArticleManager'
+import ArticleFullCard from './components/ArticleFullCard'
 
 //STATES CREATED HERE:
 //topics, filterQueries
@@ -36,9 +38,10 @@ const [topics, setTopics] = useState([]);
         <Header />
         <Navigation />
       </header>
-      <main>
-        <ArticleManager topics={topics}/>
-      </main>
+      <Routes>
+        <Route path='/' element={<ArticleManager topics={topics}/>} />
+        <Route path='/:article_id' element={<ArticleFullCard />} />
+      </Routes>
     </>
   )
 }

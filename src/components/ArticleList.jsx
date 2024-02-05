@@ -9,7 +9,6 @@ export default function ArticleList ({ articles, topics }) {
 
     return (
         <>
-        <h2>ARTICLES:</h2>
         <ul>
             {articles.map((article) => {
                 return <ArticlePreviewCard key={article.article_id} article={article} />
