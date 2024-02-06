@@ -3,7 +3,7 @@ import './App.css'
 //axios and react parts
 import axios from 'axios';
 import { useState, useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 
 //Components
 import Header from './components/Header'
@@ -17,31 +17,36 @@ import ArticleFullCard from './components/ArticleFullCard'
 function App() {
 
 //creating state
-const [topics, setTopics] = useState([]);
+// const [topics, setTopics] = useState([]);
+const [isLoading, setIsLoading] = useState(true);
 
 //fetch of all topics
-  useEffect(() => {
-    axios
-    .get('https://ncnews-lh66.onrender.com/api/topics')
-    .then((response) => {
-      return response.data.topics
-    })
-    .then((response) => {
-      setTopics(response)
-    })
-  }, [])
+  // useEffect(() => {
+  //   axios
+  //   .get('https://ncnews-lh66.onrender.com/api/topics')
+  //   .then((response) => {
+  //     return response.data.topics
+  //   })
+  //   .then((response) => {
+  //     setTopics(response)
+  //   })
+  // }, [])
 
 
   return (
     <>
-      <header>
+      <header className="container is-fluid">
+        {/* <Link to={'/'}>
         <Header />
+        </Link> */}
         <Navigation />
       </header>
+      <main className="container is-fluid">
       <Routes>
-        <Route path='/' element={<ArticleManager topics={topics}/>} />
-        <Route path='/:article_id' element={<ArticleFullCard />} />
+        <Route path='/' element={<ArticleManager setIsLoading={setIsLoading}/>} />
+        <Route path='/:article_id' element={<ArticleFullCard isLoading={isLoading} setIsLoading={setIsLoading} />} />
       </Routes>
+      </main>
     </>
   )
 }

@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { getArticles } from '../../utils/utils'
+
 export default function ArticleFullCard () {
 
     const [viewingArticle, setViewingArticle] = useState({});
@@ -9,10 +11,9 @@ export default function ArticleFullCard () {
     const { article_id } = useParams();
 
     useEffect(() => {
-        axios
-        .get(`https://ncnews-lh66.onrender.com/api/articles/${article_id}`)
+        getArticles(article_id)
         .then((response) => {
-            setViewingArticle(response.data.article)
+            setViewingArticle(response)
         })
     }, [])
 

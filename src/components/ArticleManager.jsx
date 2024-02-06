@@ -1,6 +1,6 @@
 import ArticleList from './ArticleList'
+import Loading from './Loading'
 
-import axios from 'axios';
 import { useState, useEffect } from 'react'
 
 import { getArticles } from '../../utils/utils'
@@ -13,7 +13,7 @@ import { getArticles } from '../../utils/utils'
 //topics, filterQueries
 
 
-export default function ArticleManager ({ topics }) {
+export default function ArticleManager ({ topics, isLoading, setIsLoading }) {
 
     //creating state
     const [articles, setArticles] = useState([])
@@ -22,13 +22,14 @@ export default function ArticleManager ({ topics }) {
     useEffect(() => {
         getArticles()
         .then((response) => {
+          setIsLoading(false);
           setArticles(response)
         })
       }, [])
 
     return (
         <>
-        <ArticleList articles={articles} topics={topics}/>
+        {isLoading ? <Loading /> : <ArticleList articles={articles} topics={topics}/>}
         </>
     )
 
