@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 
 import { getArticles } from '../../utils/utils'
 
+import CommentList from './CommentList';
+
 export default function ArticleFullCard () {
 
     const [viewingArticle, setViewingArticle] = useState({});
@@ -41,6 +43,8 @@ export default function ArticleFullCard () {
         <img src={article_img_url} />
         <h3>by {author}, posted {parsedDate} in {topic}</h3>
         <p>{body}</p>
+
+        <CommentList article_id={article_id}/>
         
         </>
     )

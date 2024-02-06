@@ -5,8 +5,6 @@ import ArticlePreviewCard from './ArticlePreviewCard'
 
 export default function ArticleList ({ articles, topics }) {
 
-    
-
     return (
         <>
         <ul>
