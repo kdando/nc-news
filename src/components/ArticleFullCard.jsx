@@ -4,18 +4,22 @@ import { useParams } from 'react-router-dom';
 
 import { getArticles } from '../../utils/utils'
 
+import Loading from './Loading'
 import CommentList from './CommentList';
+import AddVote from './AddVote';
 
-export default function ArticleFullCard () {
+export default function ArticleFullCard ({ isLoading, setIsLoading }) {
 
     const [viewingArticle, setViewingArticle] = useState({});
 
     const { article_id } = useParams();
 
     useEffect(() => {
+        setIsLoading(true)
         getArticles(article_id)
         .then((response) => {
             setViewingArticle(response)
+            setIsLoading(false)
         })
     }, [])
 
@@ -37,16 +41,24 @@ export default function ArticleFullCard () {
         year: 'numeric'
     });
 
-    return (
-        <>
-        <h2>{title}</h2>
-        <img src={article_img_url} />
-        <h3>by {author}, posted {parsedDate} in {topic}</h3>
-        <p>{body}</p>
-
-        <CommentList article_id={article_id}/>
-        
-        </>
-    )
+    return (<>
+        {isLoading ? 
+            <Loading /> : 
+            <>
+            <article className="box">
+            <h2>{title}</h2>
+            <img src={article_img_url} alt={title} />
+            <h3>
+            by {author}, posted {parsedDate} in {topic}
+            </h3>
+            <p>{body}</p>
+            </article>
+            
+            <AddVote article_id={article_id} votes={votes} />
+            
+            <CommentList article_id={article_id} />
+            </>
+        }
+        </>)
 
 }

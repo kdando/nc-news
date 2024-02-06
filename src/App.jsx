@@ -43,7 +43,7 @@ const [isLoading, setIsLoading] = useState(true);
       </header>
       <main className="container is-fluid">
       <Routes>
-        <Route path='/' element={<ArticleManager setIsLoading={setIsLoading}/>} />
+        <Route path='/' element={<ArticleManager isLoading={isLoading} setIsLoading={setIsLoading}/>} />
         <Route path='/:article_id' element={<ArticleFullCard isLoading={isLoading} setIsLoading={setIsLoading} />} />
       </Routes>
       </main>

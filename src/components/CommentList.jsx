@@ -15,6 +15,7 @@ export default function CommentList ({ article_id }) {
     return (
         <>
         <ul className="container is-fluid">
+            <strong>COMMENTS:</strong>
             {viewingComments.map((comment) => {
                 return <CommentCard key={comment.comment_id} comment={comment} />
             })}
