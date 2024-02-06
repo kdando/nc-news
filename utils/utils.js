@@ -10,8 +10,6 @@ export const getArticles = (article_id=undefined) => {
         fetchURL = fetchURL + '/' + String(article_id)
     }
 
-    console.log(fetchURL, "<<<OOUR FETCH URL")
-
     return axios
     .get(fetchURL)
     .then((response) => {
@@ -22,6 +20,9 @@ export const getArticles = (article_id=undefined) => {
         }
       }
     )
+    .catch((error) => {
+        return error;
+    })
 
 }
 //////////////////////////////////////////////////////////////////
@@ -33,6 +34,9 @@ export const getCommentsByArticle = (article_id=undefined) => {
     .get(fetchURL)
     .then((response) => {
         return response.data.comments;
+    })
+    .catch((error) => {
+        return error;
     })
 
 }
@@ -46,5 +50,24 @@ export const voteOnArticle = (article_id=undefined, increment=0) => {
     .then((response) => {
         return response;
     })
+    .catch((error) => {
+        return error;
+    })
 
 }
+/////////////////////////////////////////////////////////////////
+export const postNewComment = (article_id=undefined, username=undefined, body=undefined) => {
+
+    let commentURL = baseURL + `articles/${article_id}/comments`
+
+    return axios
+    .post(commentURL, { username: username, body: body })
+    .then((response) => {
+        return response;
+    })
+    .catch((error) => {
+        return error;
+    })
+
+}
+
