@@ -1,11 +1,16 @@
 import axios from 'axios';
 
+let baseURL = 'https://ncnews-lh66.onrender.com/api/'
+
+//////////////////////////////////////////////////////////////////
 export const getArticles = (article_id=undefined) => {
 
-    let fetchURL = 'https://ncnews-lh66.onrender.com/api/articles'
+    let fetchURL = baseURL + 'articles'
     if (article_id !== undefined) {
-        fetchURL = fetchURL + "/" + String(article_id)
+        fetchURL = fetchURL + '/' + String(article_id)
     }
+
+    console.log(fetchURL, "<<<OOUR FETCH URL")
 
     return axios
     .get(fetchURL)
@@ -19,10 +24,10 @@ export const getArticles = (article_id=undefined) => {
     )
 
 }
-
+//////////////////////////////////////////////////////////////////
 export const getCommentsByArticle = (article_id=undefined) => {
 
-    let fetchURL = `https://ncnews-lh66.onrender.com/api/articles/${article_id}/comments`
+    let fetchURL = baseURL + `articles/${article_id}/comments`
     
     return axios
     .get(fetchURL)
@@ -31,4 +36,15 @@ export const getCommentsByArticle = (article_id=undefined) => {
     })
 
 }
+//////////////////////////////////////////////////////////////////
+export const voteOnArticle = (article_id=undefined, increment=0) => {
 
+    let voteURL = baseURL + `articles/${article_id}`
+
+    return axios
+    .patch(voteURL, { inc_votes: increment })
+    .then((response) => {
+        return response;
+    })
+
+}

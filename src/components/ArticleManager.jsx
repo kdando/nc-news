@@ -20,10 +20,11 @@ export default function ArticleManager ({ topics, isLoading, setIsLoading }) {
 
     //fetch of all articles
     useEffect(() => {
+      setIsLoading(true);
         getArticles()
         .then((response) => {
+          setArticles(response);
           setIsLoading(false);
-          setArticles(response)
         })
       }, [])
 
