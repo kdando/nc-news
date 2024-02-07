@@ -4,7 +4,7 @@ import { postNewComment } from "../../utils/utils";
 
 import Loading from './Loading';
 
-export default function AddComment ({ article_id, setCommentSubmitted }) {
+export default function AddComment ({ article_id, setCommentsChanged }) {
 
     //grabbing context
     const { currentUser } = useContext(CurrentUserContext)
@@ -27,16 +27,16 @@ export default function AddComment ({ article_id, setCommentSubmitted }) {
     }
     //handle submission
     const handleFormSubmission = (event) => {
-        setCommentSubmitted(true);
-        setIsLoading(true);
         event.preventDefault();
+        setCommentsChanged(true);
+        setIsLoading(true);
         const newComment = { ...userCommentFinal, body: userCommentInput}
         postNewComment(article_id, newComment)
         .then(() => {
             setError(null);
-            setUserCommentInput("");
             setIsLoading(false);
-            setCommentSubmitted(false);
+            setCommentsChanged(false);
+            setUserCommentInput("");
         })
         .catch((error) => {
             setError("Comment not posted, please try again.")
@@ -47,14 +47,13 @@ export default function AddComment ({ article_id, setCommentSubmitted }) {
     
 
     return (
-        <>
         <div className="control block">
         {error && <p>{error}</p>}
         {!error && (
             <>
             {isLoading ? <Loading /> : (
                 <>
-                <p>Add a comment as <strong>{currentUser.username}</strong></p>
+                <p>You are commenting as <strong>{currentUser.username}</strong></p>
                 <form onSubmit={handleFormSubmission}>
                 <textarea className='textarea' placeholder='e.g. This article changed my life...' value={userCommentInput} onChange={handleFormChange} required></textarea>
                 <button className="button is-primary" type='submit'>Submit</button>
@@ -65,7 +64,6 @@ export default function AddComment ({ article_id, setCommentSubmitted }) {
             </>
             )}
         </div>
-        </>
     );
     
     
