@@ -35,17 +35,21 @@ const [isLoading, setIsLoading] = useState(true);
 
   return (
     <>
-      <header className="container is-fluid">
-        {/* <Link to={'/'}>
+      <header className="container is-fluid ">
+        <Link to={'/'}>
         <Header />
-        </Link> */}
+        </Link>
         <Navigation />
       </header>
       <main className="container is-fluid">
-      <Routes>
-        <Route path='/' element={<ArticleManager isLoading={isLoading} setIsLoading={setIsLoading}/>} />
-        <Route path='/:article_id' element={<ArticleFullCard isLoading={isLoading} setIsLoading={setIsLoading} />} />
-      </Routes>
+        <div className="columns is-centered">
+          <div className="column is-half">
+            <Routes>
+              <Route path='/' element={<ArticleManager isLoading={isLoading} setIsLoading={setIsLoading}/>} />
+              <Route path='/:article_id' element={<ArticleFullCard isLoading={isLoading} setIsLoading={setIsLoading} />} />
+            </Routes>
+          </div>
+        </div>
       </main>
     </>
   )

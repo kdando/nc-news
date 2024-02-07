@@ -6,6 +6,7 @@ import { useState } from 'react';
 //topics, filterQueries
 
 export default function Navigation () {
+    
 
     //state for burger menu
     const [isActive, setIsActive] = useState(false);
@@ -18,7 +19,6 @@ export default function Navigation () {
     
             <div className="navbar-brand">
                 <Link to="/" className="navbar-item">
-                    {/* <img src="https://cdn4.vectorstock.com/i/thumbs/84/43/retro-newspaper-vendor-kid-screaming-megaphone-vector-9168443.jpg" width="112" height="112" alt="Logo" /> */}
                     <h1>NC News</h1>
                 </Link>
 
@@ -35,6 +35,9 @@ export default function Navigation () {
                     <Link to="/topics" className="navbar-item">Topics</Link>
                     <Link to="/sort" className="navbar-item">Sort By</Link>
                     <Link to="/order" className="navbar-item">Order By</Link>
+                </div>
+                <div className='navbar-end'>
+                    <p className='navbar-item'>Switch User</p>
                 </div>
             </div>
         </nav>
