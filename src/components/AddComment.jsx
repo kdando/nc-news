@@ -4,7 +4,7 @@ import { postNewComment } from "../../utils/utils";
 
 import Loading from './Loading';
 
-export default function AddComment ({ article_id }) {
+export default function AddComment ({ article_id, setCommentSubmitted }) {
 
     //grabbing context
     const { currentUser } = useContext(CurrentUserContext)
@@ -27,6 +27,7 @@ export default function AddComment ({ article_id }) {
     }
     //handle submission
     const handleFormSubmission = (event) => {
+        setCommentSubmitted(true);
         setIsLoading(true);
         event.preventDefault();
         const newComment = { ...userCommentFinal, body: userCommentInput}
@@ -35,6 +36,7 @@ export default function AddComment ({ article_id }) {
             setError(null);
             setUserCommentInput("");
             setIsLoading(false);
+            setCommentSubmitted(false);
         })
         .catch((error) => {
             setError("Comment not posted, please try again.")

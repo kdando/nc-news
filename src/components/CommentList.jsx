@@ -9,6 +9,7 @@ import AddComment from "./AddComment";
 export default function CommentList ({ article_id }) {
 
     const [viewingComments, setViewingComments] = useState([]);
+    const [commentSubmitted, setCommentSubmitted] = useState(false);
 
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -24,11 +25,11 @@ export default function CommentList ({ article_id }) {
             setError(error);
             setIsLoading(false);
         })
-    }, [])
+    }, [commentSubmitted])
     
     return (
         <>
-        <AddComment article_id={article_id} />
+        <AddComment article_id={article_id} setCommentSubmitted={setCommentSubmitted}/>
             
         {error && <p>{error}</p>}
             
