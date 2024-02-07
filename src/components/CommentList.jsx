@@ -1,5 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { getCommentsByArticle } from "../../utils/utils"
+
+import Loading from './Loading'
 
 import CommentCard from './CommentCard';
 import AddComment from "./AddComment";
@@ -8,27 +10,40 @@ export default function CommentList ({ article_id }) {
 
     const [viewingComments, setViewingComments] = useState([]);
 
-    //setup context for current logged in user
-    //have default user (but option to switch)
-    //access user in AddComment to construct the request obj
-    //pass down viewingcomments as comments like we did votes to be used in optimistic rendering (as the 'real' value vs the displayed one)
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-    getCommentsByArticle(article_id)
-    .then((response) => {
-        setViewingComments(response);
-    })
-
+    useEffect(() => {
+        setIsLoading(true);
+        getCommentsByArticle(article_id)
+        .then((response) => {
+            setViewingComments(response);
+            setIsLoading(false);
+        })
+        .catch((error) => {
+            setError(error);
+            setIsLoading(false);
+        })
+    }, [])
+    
     return (
         <>
-        <AddComment />
-        
-        <ul className="container is-fluid">
+        <AddComment article_id={article_id} />
+            
+        {error && <p>{error}</p>}
+            
+        {isLoading ? (<Loading />) 
+        : (<>
+            {viewingComments !== undefined ? (
+            <ul className="container is-fluid">
             <strong>COMMENTS:</strong>
-            {viewingComments.map((comment) => {
-                return <CommentCard key={comment.comment_id} comment={comment} />
-            })}
-        </ul>
+            {viewingComments.map((comment) => (<CommentCard key={comment.comment_id} comment={comment} />))}
+            </ul>) 
+            : (<p>No comments yet.</p>)
+            }
+            </>)
+        }
         </>
-    )
+    );
 
 }

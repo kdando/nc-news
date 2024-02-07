@@ -56,12 +56,12 @@ export const voteOnArticle = (article_id=undefined, increment=0) => {
 
 }
 /////////////////////////////////////////////////////////////////
-export const postNewComment = (article_id=undefined, username=undefined, body=undefined) => {
+export const postNewComment = (article_id=undefined, comment={}) => {
 
     let commentURL = baseURL + `articles/${article_id}/comments`
 
     return axios
-    .post(commentURL, { username: username, body: body })
+    .post(commentURL, comment)
     .then((response) => {
         return response;
     })

@@ -36,9 +36,9 @@ const [isLoading, setIsLoading] = useState(true);
   return (
     <>
       <header className="container is-fluid ">
-        {/* <Link to={'/'}>
+        <Link to={'/'}>
         <Header />
-        </Link> */}
+        </Link>
         <Navigation />
       </header>
       <main className="container is-fluid">

@@ -6,6 +6,7 @@ import { useState } from 'react';
 //topics, filterQueries
 
 export default function Navigation () {
+    
 
     //state for burger menu
     const [isActive, setIsActive] = useState(false);
@@ -36,7 +37,7 @@ export default function Navigation () {
                     <Link to="/order" className="navbar-item">Order By</Link>
                 </div>
                 <div className='navbar-end'>
-                    <p className='navbar-item'>Welcome, User!</p>
+                    <p className='navbar-item'>Switch User</p>
                 </div>
             </div>
         </nav>
