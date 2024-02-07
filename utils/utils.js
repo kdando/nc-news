@@ -58,10 +58,25 @@ export const voteOnArticle = (article_id=undefined, increment=0) => {
 /////////////////////////////////////////////////////////////////
 export const postNewComment = (article_id=undefined, comment={}) => {
 
-    let commentURL = baseURL + `articles/${article_id}/comments`
+    let addCommentURL = baseURL + `articles/${article_id}/comments`
 
     return axios
-    .post(commentURL, comment)
+    .post(addCommentURL, comment)
+    .then((response) => {
+        return response;
+    })
+    .catch((error) => {
+        return error;
+    })
+
+}
+////////////////////////////////////////////////////////////////
+export const removeComment = (comment_id=undefined) => {
+
+    let delCommentURL = baseURL + `comments/${comment_id}`
+
+    return axios
+    .delete(delCommentURL)
     .then((response) => {
         return response;
     })

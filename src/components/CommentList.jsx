@@ -9,7 +9,7 @@ import AddComment from "./AddComment";
 export default function CommentList ({ article_id }) {
 
     const [viewingComments, setViewingComments] = useState([]);
-    const [commentSubmitted, setCommentSubmitted] = useState(false);
+    const [commentsChanged, setCommentsChanged] = useState(false);
 
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -25,11 +25,11 @@ export default function CommentList ({ article_id }) {
             setError(error);
             setIsLoading(false);
         })
-    }, [commentSubmitted])
+    }, [commentsChanged])
     
     return (
         <>
-        <AddComment article_id={article_id} setCommentSubmitted={setCommentSubmitted}/>
+        <AddComment article_id={article_id} setCommentsChanged={setCommentsChanged}/>
             
         {error && <p>{error}</p>}
             
@@ -38,7 +38,7 @@ export default function CommentList ({ article_id }) {
             {viewingComments !== undefined ? (
             <ul className="container is-fluid">
             <strong>COMMENTS:</strong>
-            {viewingComments.map((comment) => (<CommentCard key={comment.comment_id} comment={comment} />))}
+            {viewingComments.map((comment) => (<CommentCard key={comment.comment_id} comment={comment} setCommentsChanged={setCommentsChanged}/>))}
             </ul>) 
             : (<p>No comments yet.</p>)
             }
