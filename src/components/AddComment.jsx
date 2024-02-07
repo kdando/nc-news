@@ -1,6 +1,10 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
+import { CurrentUserContext } from "./CurrentUser";
 
 export default function AddComment () {
+
+    //grabbing context
+    const { currentUser } = useContext(CurrentUserContext)
 
     //states to track changes and handle submission
     const [userCommentInput, setUserCommentInput] = useState("");
@@ -10,28 +14,26 @@ export default function AddComment () {
     const handleFormChange = (event) => {
         event.preventDefault();
         setUserCommentInput(event.target.value)
-        
     }
     //handle submission
     const handleFormSubmission = (event) => {
         event.preventDefault();
-        setUserCommentFinal(userCommentInput);
-        console.log(userCommentFinal)
+        setUserCommentFinal(userCommentInput)
+        
     }
-    
-    let isFormReady = userCommentInput.trim() !== ''
-    
+
     useEffect(() => {
-        isFormReady = userCommentInput.trim() !== '';
-    }, [userCommentInput]);
+        console.log(userCommentFinal);
+    }, [userCommentFinal]);
+    
 
     return (
         <>
         <div className="control block">
-        <p>Add a comment. You are logged in as username</p>
-        <form>
-            <textarea className='textarea' placeholder='e.g. This article changed my life...' value={userCommentInput} onChange={handleFormChange}></textarea>
-            <button className="button is-primary" type='submit' onClick={handleFormSubmission} disabled={!isFormReady}>Submit</button>
+        <p>Add a comment. You are logged in as {currentUser.username}</p>
+        <form onSubmit={handleFormSubmission}>
+            <textarea className='textarea' placeholder='e.g. This article changed my life...' value={userCommentInput} onChange={handleFormChange} required></textarea>
+            <button className="button is-primary" type='submit'>Submit</button>
         </form>
         </div>
         </>
