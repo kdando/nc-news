@@ -10,8 +10,7 @@ import Navigation from './components/Navigation'
 import ArticleManager from './components/ArticleManager'
 import ArticleFullCard from './components/ArticleFullCard'
 
-//STATES CREATED HERE:
-//topics, filterQueries
+
 
 function App() {
 

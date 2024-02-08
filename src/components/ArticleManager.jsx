@@ -7,13 +7,11 @@ import { useParams, useSearchParams } from 'react-router-dom'
 import { getArticles } from '../../utils/utils'
 
 
-//STATES NEEDED HERE:
-//topics, filterQueries
 
 
 export default function ArticleManager ({ isLoading, setIsLoading, searchParams, filterUpdated, setFilterUpdated }) {
 
-    //grabbing params to set topic
+    //
     const { slug } = useParams();
     let topic = (slug !== "all") ? slug : undefined;
 
@@ -22,9 +20,6 @@ export default function ArticleManager ({ isLoading, setIsLoading, searchParams,
     let sortByQuery = searchParams.get('sort_by');
     let orderQuery = searchParams.get('order');
     let topicQuery = searchParams.get('topic');
-
-    console.log(orderQuery, "ORDER AT MNGR")
-
  
 
 
@@ -40,13 +35,13 @@ export default function ArticleManager ({ isLoading, setIsLoading, searchParams,
     //fetch of articles
     useEffect(() => {
       setIsLoading(true);
-        getArticles(undefined, topicQuery, orderQuery)
+        getArticles(undefined, topicQuery, sortByQuery, orderQuery)
         .then((response) => {
           setArticles(response);
           setIsLoading(false);
           setFilterUpdated(false);
         })
-      }, [filterUpdated])
+      }, [topicQuery, filterUpdated])
 
     return (
         <>

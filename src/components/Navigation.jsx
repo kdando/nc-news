@@ -2,11 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { useState } from 'react';
 
-//STATES SET HERE:
-//topics, filterQueries
-
 export default function Navigation ({ searchParams, setSearchParams, setFilterUpdated }) {
-
 
     //state for burger menu
     const [isActive, setIsActive] = useState(false);
@@ -16,21 +12,25 @@ export default function Navigation ({ searchParams, setSearchParams, setFilterUp
 
 
     //   //////////
+    //for some reason setting Params through a clone does not change
+    //mutating original for now...to be addressed
+
       const setOrder = (direction) => {
         // const newParams = new URLSearchParams(searchParams);
         searchParams.set('order', direction);
         // console.log(newParams, "<<<NEW PARAMS FROM BUTTON IN NAV")
         // setSearchParams(newParams);
       };
+
+      const setSort = (criteria) => {
+        searchParams.set('sort_by', criteria);
+      }
     //   //////////
 
     const setFilter = () => {
         setFilterUpdated(true);
     }
     
-
-
-
     return (
         <nav className="navbar" role="navigation" aria-label="main navigation">
     
@@ -61,17 +61,32 @@ export default function Navigation ({ searchParams, setSearchParams, setFilterUp
 
                     </div>
 
-                    <Link to="/sort" className="navbar-item">Sort By</Link>
+                    
+
+                    <div className='navbar-item select'>
+                        <select onChange={(event) => setSort(event.target.value)}>
+                            <option value='created_at'>Date</option>
+                            <option value='comment_count'>Comments</option>
+                            <option value='votes'>Votes</option>
+                        </select>
+                    </div>
+
+                    <div className='navbar-item select'>
+                        <select onChange={(event) => setOrder(event.target.value)}>
+                            <option value='desc'>Descending</option>
+                            <option value='asc'>Ascending</option>
+                        </select>
+                    </div>
 
 
-                    <div className="navbar-item has-dropdown is-hoverable">
+                    {/* <div className="navbar-item has-dropdown is-hoverable">
                         <div className='navbar-link'>Order By</div>
                         <div className='navbar-dropdown'>
                             <Link  className='navbar-item' to='/' onClick={() => setOrder('desc')}>Newest</Link>
                             <Link to='/' className='navbar-item' onClick={() => setOrder('asc')}  >Oldest</Link>
                         </div>
 
-                    </div>
+                    </div> */}
 
                     <div className='navbar-item'>
                         <button className='button' onClick={setFilter}>Filter</button>

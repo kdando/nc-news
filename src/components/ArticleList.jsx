@@ -1,8 +1,5 @@
 import ArticlePreviewCard from './ArticlePreviewCard'
 
-//STATES NEEDED HERE:
-//articles, topics, filterQueries
-
 export default function ArticleList ({ articles }) {
 
     return (
