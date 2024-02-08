@@ -6,13 +6,28 @@ import { useState } from 'react';
 //topics, filterQueries
 
 export default function Navigation () {
-    
+
 
     //state for burger menu
     const [isActive, setIsActive] = useState(false);
     const toggleMenu = () => {
         setIsActive(!isActive);
     };
+
+
+      //////////
+      const [searchParams, setSearchParams] = useSearchParams();
+      const sortByQuery = searchParams.get('sort_by');
+      const orderQuery = searchParams.get('order');
+  
+      const setOrder = (direction) => {
+        const newParams = new URLSearchParams(searchParams);
+        newParams.set('order', direction);
+        setSearchParams(newParams);
+      };
+      //////////
+
+
 
     return (
         <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -34,9 +49,7 @@ export default function Navigation () {
                     <Link to="/" className="navbar-item">Home</Link>
 
                     <div className="navbar-item has-dropdown is-hoverable">
-
                         <div className='navbar-link'>Topics</div>
-
                         <div className='navbar-dropdown'>
                             <Link  className='navbar-item' to='/topics/all'>All</Link>
                             <Link to='/topics/coding' className='navbar-item'>Coding</Link>
@@ -47,7 +60,18 @@ export default function Navigation () {
                     </div>
 
                     <Link to="/sort" className="navbar-item">Sort By</Link>
-                    <Link to="/order" className="navbar-item">Order By</Link>
+
+
+                    <div className="navbar-item has-dropdown is-hoverable">
+                        <div className='navbar-link'>Order By</div>
+                        <div className='navbar-dropdown'>
+                            <Link  className='navbar-item' to='/'>Newest</Link>
+                            <Link to='/' className='navbar-item' onClick={() => setOrder('desc')}>Oldest</Link>
+                        </div>
+
+                    </div>
+
+
                 </div>
                 <div className='navbar-end'>
                     <p className='navbar-item'>Switch User</p>
