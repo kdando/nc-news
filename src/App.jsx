@@ -10,6 +10,7 @@ import Header from './components/Header'
 import Navigation from './components/Navigation'
 import ArticleManager from './components/ArticleManager'
 import ArticleFullCard from './components/ArticleFullCard'
+import TopicManager from './components/TopicManager';
 
 //STATES CREATED HERE:
 //topics, filterQueries
@@ -47,6 +48,9 @@ const [isLoading, setIsLoading] = useState(true);
             <Routes>
               <Route path='/' element={<ArticleManager isLoading={isLoading} setIsLoading={setIsLoading}/>} />
               <Route path='/:article_id' element={<ArticleFullCard isLoading={isLoading} setIsLoading={setIsLoading} />} />
+
+              <Route path='/topics/:slug' element={<ArticleManager isLoading={isLoading} setIsLoading={setIsLoading} />}/>
+
             </Routes>
           </div>
         </div>

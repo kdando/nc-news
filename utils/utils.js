@@ -3,11 +3,14 @@ import axios from 'axios';
 let baseURL = 'https://ncnews-lh66.onrender.com/api/'
 
 //////////////////////////////////////////////////////////////////
-export const getArticles = (article_id=undefined) => {
+export const getArticles = (article_id=undefined, topic=undefined) => {
 
     let fetchURL = baseURL + 'articles'
     if (article_id !== undefined) {
         fetchURL = fetchURL + '/' + String(article_id)
+    }
+    if (topic !== undefined) {
+        fetchURL = fetchURL + `?topic=${topic}`
     }
 
     return axios
@@ -85,4 +88,6 @@ export const removeComment = (comment_id=undefined) => {
     })
 
 }
+///////////////////////////////////////////////////////////////
+
 

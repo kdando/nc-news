@@ -32,7 +32,20 @@ export default function Navigation () {
             <div className={`navbar-menu ${isActive ? 'is-active' : ''}`}>
                 <div className="navbar-start">
                     <Link to="/" className="navbar-item">Home</Link>
-                    <Link to="/topics" className="navbar-item">Topics</Link>
+
+                    <div className="navbar-item has-dropdown is-hoverable">
+
+                        <div className='navbar-link'>Topics</div>
+
+                        <div className='navbar-dropdown'>
+                            <Link  className='navbar-item' to='/topics/all'>All</Link>
+                            <Link to='/topics/coding' className='navbar-item'>Coding</Link>
+                            <Link to='/topics/cooking' className='navbar-item'>Cooking</Link>
+                            <Link to='/topics/football' className='navbar-item'>Football</Link>
+                        </div>
+
+                    </div>
+
                     <Link to="/sort" className="navbar-item">Sort By</Link>
                     <Link to="/order" className="navbar-item">Order By</Link>
                 </div>
