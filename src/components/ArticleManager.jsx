@@ -2,36 +2,46 @@ import ArticleList from './ArticleList'
 import Loading from './Loading'
 
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 
 import { getArticles } from '../../utils/utils'
 
 
-//STATES CREATED HERE:
-//articles
-
-//STATES NEEDED HERE:
-//topics, filterQueries
 
 
-export default function ArticleManager ({ isLoading, setIsLoading }) {
+export default function ArticleManager ({ isLoading, setIsLoading, searchParams, filterUpdated, setFilterUpdated }) {
 
-    //grabbing params and setting topic
+    //
     const { slug } = useParams();
     let topic = (slug !== "all") ? slug : undefined;
+
+    searchParams.set('topic', topic)
+
+    let sortByQuery = searchParams.get('sort_by');
+    let orderQuery = searchParams.get('order');
+    let topicQuery = searchParams.get('topic');
+ 
+
+
+////////////////
+    
+
+    /////////////
+   
 
     //creating state
     const [articles, setArticles] = useState([])
 
-    //fetch of all articles
+    //fetch of articles
     useEffect(() => {
       setIsLoading(true);
-        getArticles(undefined, topic)
+        getArticles(undefined, topicQuery, sortByQuery, orderQuery)
         .then((response) => {
           setArticles(response);
           setIsLoading(false);
+          setFilterUpdated(false);
         })
-      }, [topic])
+      }, [topicQuery, filterUpdated])
 
     return (
         <>
