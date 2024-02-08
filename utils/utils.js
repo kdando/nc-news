@@ -3,15 +3,53 @@ import axios from 'axios';
 let baseURL = 'https://ncnews-lh66.onrender.com/api/'
 
 //////////////////////////////////////////////////////////////////
-export const getArticles = (article_id=undefined, topic=undefined) => {
+export const getArticles = (article_id=undefined, topic=undefined, order=undefined) => {
+
+    console.log(order, "<<<ORDER IN UTIL")
+    console.log(topic, "<<TOPIC IN UTIL")
 
     let fetchURL = baseURL + 'articles'
+    //get 1 article or many
     if (article_id !== undefined) {
-        fetchURL = fetchURL + '/' + String(article_id)
+        fetchURL += '/' + String(article_id)
     }
-    if (topic !== undefined) {
-        fetchURL = fetchURL + `?topic=${topic}`
+
+    //
+    let queryNames = ["topic", "order"];
+    let queries = [topic, order]
+    console.log(typeof queries[0], "<<TYPEOF TOPIC", typeof queries[1], "<<TYPEOF ORDER");
+
+    for (let i=0; i<queries.length; i++) {
+        console.log(typeof queries[i], "<<TYPE OF ELEMENT")
+        if (queries[i] !== undefined && queries[i] !== 'undefined' && queries[i] !== null) {
+            queries[i] = `${queryNames[i]}=${queries[i]}`
+            console.log(queries[i], "WE HERE")
+        }
     }
+
+    queries = queries.filter((item) => item !== undefined && item !== 'undefined' && item !== null)
+    console.log(queries, "<<queries arr after filter");
+
+    if (queries.length > 0) {
+
+        let queryStr = queries.join("&")
+        fetchURL += '?' + queryStr
+    }
+
+        
+
+      
+
+        console.log(fetchURL);
+        
+
+    // if (topic !== undefined) {
+    //     fetchURL += `?topic=${topic}`
+    // }
+
+    // if (order !== undefined) {
+    //     fetchURL = fetchURL + `?order=${order}`
+    // }
 
     return axios
     .get(fetchURL)

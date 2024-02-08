@@ -7,29 +7,31 @@ import { useParams, useSearchParams } from 'react-router-dom'
 import { getArticles } from '../../utils/utils'
 
 
-//STATES CREATED HERE:
-//articles
-
 //STATES NEEDED HERE:
 //topics, filterQueries
 
 
-export default function ArticleManager ({ isLoading, setIsLoading }) {
+export default function ArticleManager ({ isLoading, setIsLoading, searchParams, filterUpdated, setFilterUpdated }) {
 
     //grabbing params to set topic
     const { slug } = useParams();
     let topic = (slug !== "all") ? slug : undefined;
 
-    //
-    const [searchParams, setSearchParams] = useSearchParams();
-    const sortByQuery = searchParams.get('sort_by');
-    const orderQuery = searchParams.get('order');
+    searchParams.set('topic', topic)
 
-    const setOrder = (direction) => {
-      const newParams = new URLSearchParams(searchParams);
-      newParams.set('order', direction);
-      setSearchParams(newParams);
-    };
+    let sortByQuery = searchParams.get('sort_by');
+    let orderQuery = searchParams.get('order');
+    let topicQuery = searchParams.get('topic');
+
+    console.log(orderQuery, "ORDER AT MNGR")
+
+ 
+
+
+////////////////
+    
+
+    /////////////
    
 
     //creating state
@@ -38,12 +40,13 @@ export default function ArticleManager ({ isLoading, setIsLoading }) {
     //fetch of articles
     useEffect(() => {
       setIsLoading(true);
-        getArticles(undefined, topic)
+        getArticles(undefined, topicQuery, orderQuery)
         .then((response) => {
           setArticles(response);
           setIsLoading(false);
+          setFilterUpdated(false);
         })
-      }, [topic])
+      }, [filterUpdated])
 
     return (
         <>
