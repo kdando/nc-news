@@ -33,7 +33,7 @@ export default function ArticlePreviewCard ({ article }) {
             <img src={article_img_url} />
         </div>
         <div className='card-content'>
-            posted by {author} on {parsedDate}
+            posted by {author} on {parsedDate} in {topic}
         </div>
         <footer className='card-footer'>
             <span className='card-footer-item'>
