@@ -135,5 +135,21 @@ export const removeComment = (comment_id=undefined) => {
 
 }
 ///////////////////////////////////////////////////////////////
+export const getUsers = () => {
 
+    let usersURL = baseURL + 'users'
+
+    console.log(usersURL)
+
+    return axios
+    .get(usersURL)
+    .then((response) => {
+        return response;
+    })
+    .catch((error) => {
+        return error;
+    })
+
+}
+//////////////////////////////////////////////////////////////
 
