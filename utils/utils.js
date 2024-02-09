@@ -40,6 +40,7 @@ export const getArticles = (article_id=undefined, topic=undefined, sort_by=undef
     .then((response) => {
         //RETURN ONE ARTICLE
         if (article_id !== undefined) {
+            console.log(response.status)
             return response.data.article;
         //RETURN MANY ARTICLES
         } else {
@@ -50,7 +51,6 @@ export const getArticles = (article_id=undefined, topic=undefined, sort_by=undef
 
             //SORT DESCENDING
             if (order === "desc" || order === null) {
-
                 if (sort_by !== null) {
                     response.data.articles.sort((a,b) => b[sort_by] - a[sort_by])
                 } else {
@@ -69,9 +69,8 @@ export const getArticles = (article_id=undefined, topic=undefined, sort_by=undef
         }
       }
     )
-    .catch((error) => {
-        return error;
-    })
+    
+    //HAD TO REMOVE CATCH BLOCK AS ERROR WOULD NOT PASS UP TO CATCHS IN JSX -- WHY???
 
 }
 //////////////////////////////////////////////////////////////////
@@ -85,6 +84,7 @@ export const getCommentsByArticle = (article_id=undefined) => {
         return response.data.comments;
     })
     .catch((error) => {
+        console.log("ERROR FETCHING COMMENTS")
         return error;
     })
 

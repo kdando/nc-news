@@ -26,12 +26,14 @@ export default function CommentList ({ article_id }) {
             setIsLoading(false);
         })
     }, [commentsChanged])
+
+    
     
     return (
         <>
         <AddComment article_id={article_id} setCommentsChanged={setCommentsChanged}/>
             
-        {error && <p>{error}</p>}
+        {error ? <p>{error}</p> : null}
             
         {isLoading ? (<Loading />) 
         : (<>

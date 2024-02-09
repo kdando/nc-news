@@ -9,6 +9,7 @@ import Header from './components/Header'
 import Navigation from './components/Navigation'
 import ArticleManager from './components/ArticleManager'
 import ArticleFullCard from './components/ArticleFullCard'
+import Error from './components/Error'
 
 
 
@@ -43,9 +44,11 @@ const [filterUpdated, setFilterUpdated] = useState(false);
 
               <Route path='/' element={<ArticleManager isLoading={isLoading} setIsLoading={setIsLoading}  searchParams={searchParams}  filterUpdated={filterUpdated} setFilterUpdated={setFilterUpdated} />} />
 
-              <Route path='/:article_id' element={<ArticleFullCard isLoading={isLoading} setIsLoading={setIsLoading} />} />
+              <Route path='/articles/:article_id' element={<ArticleFullCard isLoading={isLoading} setIsLoading={setIsLoading} />} />
 
               <Route path='/topics/:slug' element={<ArticleManager isLoading={isLoading} setIsLoading={setIsLoading} searchParams={searchParams}  filterUpdated={filterUpdated} setFilterUpdated={setFilterUpdated} />}/>
+
+              <Route path='*' element={<Error />} />
 
             </Routes>
           </div>

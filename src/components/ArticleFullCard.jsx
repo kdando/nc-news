@@ -7,21 +7,33 @@ import { getArticles } from '../../utils/utils'
 import Loading from './Loading'
 import CommentList from './CommentList';
 import AddVote from './AddVote';
+import Error from './Error'
 
 export default function ArticleFullCard ({ isLoading, setIsLoading }) {
 
+    //state for displayed article
     const [viewingArticle, setViewingArticle] = useState({});
 
+    //grabbing article_id from url
     const { article_id } = useParams();
 
+    //state for error
+    const [error, setError] = useState(null);
+
+
     useEffect(() => {
-        setIsLoading(true)
-        getArticles(article_id)
-        .then((response) => {
-            setViewingArticle(response)
-            setIsLoading(false)
-        })
-    }, [])
+            setIsLoading(true)
+            getArticles(article_id)
+            .then((response) => {
+                setViewingArticle(response)
+                setIsLoading(false)
+                setError(null);
+            })
+            .catch((error) => {
+                setIsLoading(false);
+                setError({ status: error.response.status, msg: error.response.data.msg })
+            });
+    }, [article_id])
 
     const {
         body,
@@ -40,6 +52,10 @@ export default function ArticleFullCard ({ isLoading, setIsLoading }) {
         month: '2-digit',
         year: 'numeric'
     });
+
+    if (error) {
+        return <Error error={error} />;
+    }
 
     return (<>
         {isLoading ? 
