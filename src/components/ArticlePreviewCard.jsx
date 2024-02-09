@@ -1,8 +1,5 @@
 import { Link } from 'react-router-dom';
 
-//STATES NEEDED HERE:
-//articles
-
 export default function ArticlePreviewCard ({ article }) {
 
     const {
@@ -26,7 +23,7 @@ export default function ArticlePreviewCard ({ article }) {
 
     return (
         <>
-        <Link to={`/${article_id}`}>
+        <Link to={`/articles/${article_id}`}>
         <div className='card mb-4 mt-4'>
         <p className='card-header'>{title}</p>
         <div className='card-image'>
