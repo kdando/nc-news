@@ -36,7 +36,7 @@ export default function Navigation ({ searchParams, setSearchParams, setFilterUp
     
             <div className="navbar-brand">
                 <Link to="/" className="navbar-item">
-                    <h1>NC News</h1>
+                    <h1>KNC News</h1>
                 </Link>
 
                 <a role="button" className={`navbar-burger ${isActive ? 'is-active' : ''}`} aria-label="menu" aria-expanded={isActive ? 'true' : 'false'} onClick={toggleMenu}>
