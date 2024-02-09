@@ -1,4 +1,6 @@
+//React and React Router parts
 import { Link } from 'react-router-dom';
+
 
 export default function ArticlePreviewCard ({ article }) {
 

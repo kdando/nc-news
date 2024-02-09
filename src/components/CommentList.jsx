@@ -1,19 +1,24 @@
+//React and React Router parts
 import { useEffect, useState } from "react"
+
+//Util function
 import { getCommentsByArticle } from "../../utils/utils"
 
-import Loading from './Loading'
-
+//Components
 import CommentCard from './CommentCard';
 import AddComment from "./AddComment";
+import Loading from './Loading'
+
 
 export default function CommentList ({ article_id }) {
 
+    //STATES
     const [viewingComments, setViewingComments] = useState([]);
     const [commentsChanged, setCommentsChanged] = useState(false);
-
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    //API CALL
     useEffect(() => {
         setIsLoading(true);
         getCommentsByArticle(article_id)
@@ -27,7 +32,6 @@ export default function CommentList ({ article_id }) {
         })
     }, [commentsChanged])
 
-    
     
     return (
         <>

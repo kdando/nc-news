@@ -1,19 +1,21 @@
 //React parts
 import { useState } from 'react';
 
+//Util function
+import { voteOnArticle } from '../../utils/utils';
+
+//Styling
 import Icon from '@mdi/react';
 import { mdiThumbUp, mdiThumbDown  } from '@mdi/js';
 
 
-import { voteOnArticle } from '../../utils/utils';
-
-
-
 export default function AddVote ({ article_id, votes }) {
 
+    //STATES
     const [currentVotes, setCurrentVotes] = useState(votes);
     const [error, setError] = useState(null);
 
+    //HANDLE POS/NEG VOTE CLICK
     const handleUpVoteClick = () => {
         setCurrentVotes((displayedVotes) => displayedVotes + 1);
         setError(null);
@@ -32,6 +34,7 @@ export default function AddVote ({ article_id, votes }) {
             setError("Something went wrong, please try again.")
         })
     }
+    
     
     return (
         <>

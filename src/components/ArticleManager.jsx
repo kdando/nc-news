@@ -1,26 +1,31 @@
-import Error from './Error';
-import ArticleList from './ArticleList';
-import Loading from './Loading';
+//React and React Router parts
 import { useState, useEffect } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
+//Util function
 import { getArticles } from '../../utils/utils';
 
+//Components
+import ArticleList from './ArticleList';
+import Loading from './Loading';
+import Error from './Error';
+
+
 export default function ArticleManager ({ isLoading, setIsLoading, searchParams, filterUpdated, setFilterUpdated }) {
-    
+
+    //STATES
+    const [articles, setArticles] = useState([]);
+    const [error, setError] = useState(null);
+
+    //PARAMS
     const { slug } = useParams();
     let topic = (slug !== "all") ? slug : undefined;
     searchParams.set('topic', topic);
-
-    const [error, setError] = useState(null);
-
-    // Variables for query parameters
     let sortByQuery = searchParams.get('sort_by');
     let orderQuery = searchParams.get('order');
     let topicQuery = searchParams.get('topic');
 
-    // State for storing articles
-    const [articles, setArticles] = useState([]);
-
+    //API CALL
     useEffect(() => {
             setIsLoading(true);
             getArticles(undefined, topicQuery, sortByQuery, orderQuery)
@@ -34,6 +39,7 @@ export default function ArticleManager ({ isLoading, setIsLoading, searchParams,
                     setError({ status: error.response.status, msg: error.response.data.msg });
                 });
     }, [topicQuery, sortByQuery, orderQuery, setIsLoading, setFilterUpdated]);
+
 
     if (error) {
         return <Error error={error}/>;

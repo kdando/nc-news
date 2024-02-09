@@ -1,7 +1,10 @@
+//Components
 import ArticlePreviewCard from './ArticlePreviewCard'
+
 
 export default function ArticleList ({ articles }) {
 
+    
     return (
         <>
         <ul>

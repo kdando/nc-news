@@ -1,26 +1,27 @@
-import axios from 'axios';
+//React and React Router parts
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+//Util function
 import { getArticles } from '../../utils/utils'
 
+//Components
 import Loading from './Loading'
 import CommentList from './CommentList';
 import AddVote from './AddVote';
 import Error from './Error'
 
+
 export default function ArticleFullCard ({ isLoading, setIsLoading }) {
 
-    //state for displayed article
+    //STATES
     const [viewingArticle, setViewingArticle] = useState({});
-
-    //grabbing article_id from url
-    const { article_id } = useParams();
-
-    //state for error
     const [error, setError] = useState(null);
 
+    //PARAMS
+    const { article_id } = useParams();
 
+    //API CALL
     useEffect(() => {
             setIsLoading(true)
             getArticles(article_id)
@@ -42,7 +43,6 @@ export default function ArticleFullCard ({ isLoading, setIsLoading }) {
         topic,
         created_at,
         votes,
-        comment_count,
         article_img_url
     } = viewingArticle;
 
@@ -53,6 +53,7 @@ export default function ArticleFullCard ({ isLoading, setIsLoading }) {
         year: 'numeric'
     });
 
+    
     if (error) {
         return <Error error={error} />;
     }

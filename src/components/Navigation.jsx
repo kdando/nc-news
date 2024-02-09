@@ -1,35 +1,44 @@
+//React and Router part
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useState } from 'react';
 
 export default function Navigation ({ searchParams, setSearchParams, setFilterUpdated }) {
 
-    //state for burger menu
+
+    //STATES
     const [isActive, setIsActive] = useState(false);
+
+    //SETTING BURGER MENU VISIBILITY, FILTER UPDATED, WHAT TO SORT AND ORDER BY
     const toggleMenu = () => {
         setIsActive(!isActive);
     };
 
+    const setFilter = () => {
+        setFilterUpdated(true);
+    };
 
-    //   //////////
+    const setSort = (criteria) => {
+        searchParams.set('sort_by', criteria);
+    };
+
+    const setOrder = (direction) => {
+        searchParams.set('order', direction);
+    };
+
+    ////////////
     //for some reason setting Params through a clone does not change
     //mutating original for now...to be addressed
 
-      const setOrder = (direction) => {
-        // const newParams = new URLSearchParams(searchParams);
-        searchParams.set('order', direction);
-        // console.log(newParams, "<<<NEW PARAMS FROM BUTTON IN NAV")
-        // setSearchParams(newParams);
-      };
+    //   const setOrder = (direction) => {
+    //     // const newParams = new URLSearchParams(searchParams);
+    //     newParams.set('order', direction);
+    //     // console.log(newParams, "<<<NEW PARAMS FROM BUTTON IN NAV")
+    //     // setSearchParams(newParams);
+    //   };
 
-      const setSort = (criteria) => {
-        searchParams.set('sort_by', criteria);
-      }
     //   //////////
 
-    const setFilter = () => {
-        setFilterUpdated(true);
-    }
     
     return (
         <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -58,10 +67,7 @@ export default function Navigation ({ searchParams, setSearchParams, setFilterUp
                             <Link to='/topics/cooking' className='navbar-item'>Cooking</Link>
                             <Link to='/topics/football' className='navbar-item'>Football</Link>
                         </div>
-
                     </div>
-
-                    
 
                     <div className='navbar-item select'>
                         <select onChange={(event) => setSort(event.target.value)}>
@@ -78,25 +84,16 @@ export default function Navigation ({ searchParams, setSearchParams, setFilterUp
                         </select>
                     </div>
 
-
-                    {/* <div className="navbar-item has-dropdown is-hoverable">
-                        <div className='navbar-link'>Order By</div>
-                        <div className='navbar-dropdown'>
-                            <Link  className='navbar-item' to='/' onClick={() => setOrder('desc')}>Newest</Link>
-                            <Link to='/' className='navbar-item' onClick={() => setOrder('asc')}  >Oldest</Link>
-                        </div>
-
-                    </div> */}
-
                     <div className='navbar-item'>
                         <button className='button' onClick={setFilter}>Sort</button>
                     </div>
 
-
                 </div>
+
                 <div className='navbar-end'>
                     <p className='navbar-item'>Switch User</p>
                 </div>
+
             </div>
         </nav>
     );

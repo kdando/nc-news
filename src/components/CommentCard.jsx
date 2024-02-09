@@ -1,18 +1,24 @@
+//React and React Router parts
 import { useState, useContext } from "react";
+
+//Context
 import { CurrentUserContext } from "./CurrentUser";
 
+//Util function
+import { removeComment } from "../../utils/utils";
+
+//Styling
 import Icon from '@mdi/react';
 import { mdiDeleteForever } from '@mdi/js';
 
-import { removeComment } from "../../utils/utils";
 
 export default function CommentCard ({ comment, setCommentsChanged }) {
 
-    const [error, setError] = useState(null);
+    //STATES
     const [isLoading, setIsLoading] = useState(false);
-
-
-    //grabbing context and setting up variables
+    const [error, setError] = useState(null);
+    
+    //CONTEXT
     const { currentUser } = useContext(CurrentUserContext)
 
     const {
@@ -30,9 +36,8 @@ export default function CommentCard ({ comment, setCommentsChanged }) {
         year: 'numeric'
     });
 
-    //delete comment button function
+    //HANDLE DELETE COMMENT
     const handleDeleteClick = (event) => {
-
         event.preventDefault();
         setCommentsChanged(true);
         setIsLoading(true);
@@ -46,13 +51,11 @@ export default function CommentCard ({ comment, setCommentsChanged }) {
             setError("Comment not deleted, please try again.")
             setIsLoading(false);
         })
-        
-
     }
+
 
     return (
         <>
-
         {error && <p>{error}</p>}
         
         <div className="card mt-2">
