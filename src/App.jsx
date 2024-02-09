@@ -11,6 +11,7 @@ import Error from './components/Error'
 
 //Styling
 import './App.css'
+import SwitchUser from './components/SwitchUser';
 
 
 export default function App() {
@@ -41,6 +42,8 @@ const [searchParams, setSearchParams] = useSearchParams();
               <Route path='/articles/:article_id' element={<ArticleFullCard isLoading={isLoading} setIsLoading={setIsLoading} />} />
 
               <Route path='/topics/:slug' element={<ArticleManager isLoading={isLoading} setIsLoading={setIsLoading} searchParams={searchParams}  filterUpdated={filterUpdated} setFilterUpdated={setFilterUpdated} />}/>
+
+              <Route path='/switch-user' element={<SwitchUser isLoading={isLoading} setIsLoading={setIsLoading} />} />
 
               <Route path='*' element={<Error />} />
 
