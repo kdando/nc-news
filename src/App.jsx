@@ -1,6 +1,4 @@
-import './App.css'
-
-//react parts
+//React and React Router parts
 import { useState } from 'react'
 import { Routes, Route, Link, useSearchParams } from 'react-router-dom';
 
@@ -11,23 +9,19 @@ import ArticleManager from './components/ArticleManager'
 import ArticleFullCard from './components/ArticleFullCard'
 import Error from './components/Error'
 
+//Styling
+import './App.css'
 
 
-function App() {
+export default function App() {
 
-//creating state
+//STATES
 const [isLoading, setIsLoading] = useState(true);
-
-/////
-const [searchParams, setSearchParams] = useSearchParams();
-
-////////
 const [filterUpdated, setFilterUpdated] = useState(false);
 
-///////
+//SEARCH PARAMS
+const [searchParams, setSearchParams] = useSearchParams();
 
-
-////
 
   return (
     <>
@@ -56,6 +50,5 @@ const [filterUpdated, setFilterUpdated] = useState(false);
       </main>
     </>
   )
-}
 
-export default App
+}

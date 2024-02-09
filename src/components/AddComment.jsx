@@ -1,31 +1,37 @@
+//React and React Router Parts
 import { useState, useEffect, useContext } from "react"
+
+//Context
 import { CurrentUserContext } from "./CurrentUser";
+
+//Util function
 import { postNewComment } from "../../utils/utils";
 
+//Components
 import Loading from './Loading';
+
 
 export default function AddComment ({ article_id, setCommentsChanged }) {
 
-    //grabbing context
+    //CONTEXT
     const { currentUser } = useContext(CurrentUserContext)
 
-    //states to track changes and handle submission
+    //STATES
     const [userCommentInput, setUserCommentInput] = useState("");
     const [userCommentFinal, setUserCommentFinal] = useState({
         username: currentUser.username,
         body: undefined
     });
-
-    //state for errors and loading
-    const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-    //handle changes to form
+    //HANDLE CHANGES TO FORM
     const handleFormChange = (event) => {
         event.preventDefault();
         setUserCommentInput(event.target.value)
     }
-    //handle submission
+
+    //HANDLE SUBMISSION OF FORM
     const handleFormSubmission = (event) => {
         event.preventDefault();
         setCommentsChanged(true);
@@ -42,7 +48,6 @@ export default function AddComment ({ article_id, setCommentsChanged }) {
             setError("Comment not posted, please try again.")
             setIsLoading(false);
         })
-        
     }
     
 
@@ -65,6 +70,5 @@ export default function AddComment ({ article_id, setCommentsChanged }) {
             )}
         </div>
     );
-    
     
 }

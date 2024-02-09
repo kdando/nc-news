@@ -1,7 +1,10 @@
+//React parts
+import { useState } from 'react';
+
 import Icon from '@mdi/react';
 import { mdiThumbUp, mdiThumbDown  } from '@mdi/js';
 
-import { useState } from 'react';
+
 import { voteOnArticle } from '../../utils/utils';
 
 
