@@ -21,7 +21,7 @@ export default function ArticleManager ({ isLoading, setIsLoading, searchParams,
     const { slug } = useParams();
     let topic = (slug !== "all") ? slug : undefined;
     searchParams.set('topic', topic);
-    let sortByQuery = searchParams.get('sort_by');
+    let sortByQuery = searchParams.get('sorted_by');
     let orderQuery = searchParams.get('order');
     let topicQuery = searchParams.get('topic');
 

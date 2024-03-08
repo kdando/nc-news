@@ -13,15 +13,17 @@ export const getArticles = (article_id=undefined, topic=undefined, sort_by=undef
     }
 
     //fetching multiple articles and allowing for queries...
-    let queryNames = ["sort_by", "order"];
-    let queries = [sort_by, order]
+    let queryNames = ["topic", "sort_by", "order"];
+    let queries = [topic, sort_by, order]
 
+    //loop throu queries array, if it is given (i.e. not undefined etc) then replace value with a string made of the value but formatted for the fetch URL
     for (let i=0; i<queries.length; i++) {
         if (queries[i] !== undefined && queries[i] !== 'undefined' && queries[i] !== null) {
             queries[i] = `${queryNames[i]}=${queries[i]}`
         }
     }
 
+    //NOT SURE ABOUT THIS LINE??????IS IT NEEDED???
     queries = queries.filter((item) => item !== undefined && item !== 'undefined' && item !== null)
 
     if (queries.length > 0) {
@@ -31,39 +33,42 @@ export const getArticles = (article_id=undefined, topic=undefined, sort_by=undef
 
     /////////CANT QUERY TOPIC AND OTHER PARAMS AT SAME TIME DUE TO BACKEND BEHAVIOUR
     ////WILL REFACTOR BACKEND TO ALLOW THIS FUNCTIONALITY
-    if (topic !== undefined && topic !== 'undefined' && topic !== null) {
-        fetchURL = baseURL + `articles?topic=${topic}`
-    }
+    // if (topic !== undefined && topic !== 'undefined' && topic !== null) {
+    //     fetchURL = baseURL + `articles?topic=${topic}`
+    // }
+
+    
 
     return axios
     .get(fetchURL)
     .then((response) => {
         //RETURN ONE ARTICLE
         if (article_id !== undefined) {
-            console.log(response.status)
             return response.data.article;
         //RETURN MANY ARTICLES
         } else {
+
+            console.log(response.data.articles)
             
         //SORTING HERE BECAUSE API ENDPOINT DOESN'T BEHAVE PROPERLY WITH LIVE DATA
         //ALSO UNABLE TO COMBINE TOPIC AND SORT_BY/ORDER
         //BACKEND TO BE REDRESSED
 
             //SORT DESCENDING
-            if (order === "desc" || order === null) {
-                if (sort_by !== null) {
-                    response.data.articles.sort((a,b) => b[sort_by] - a[sort_by])
-                } else {
-                    response.data.articles.sort((a,b) => b.created_at - a.created_at)
-                }
-            } else {
-            //SORT ASCENDING
-                if (sort_by !== null) {
-                    response.data.articles.sort((a,b) => a[sort_by] - b[sort_by])
-                } else {
-                    response.data.articles.sort((a,b) => a.created_at - b.created_at)
-                }
-            }
+            // if (order === "desc" || order === null) {
+            //     if (sort_by !== null) {
+            //         response.data.articles.sort((a,b) => b[sort_by] - a[sort_by])
+            //     } else {
+            //         response.data.articles.sort((a,b) => b.created_at - a.created_at)
+            //     }
+            // } else {
+            // //SORT ASCENDING
+            //     if (sort_by !== null) {
+            //         response.data.articles.sort((a,b) => a[sort_by] - b[sort_by])
+            //     } else {
+            //         response.data.articles.sort((a,b) => a.created_at - b.created_at)
+            //     }
+            // }
 
             return response.data.articles;
         }
