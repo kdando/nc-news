@@ -18,10 +18,7 @@ export default function ArticleManager ({ isLoading, setIsLoading, searchParams,
     const [error, setError] = useState(null);
 
     //PARAMS
-    const { slug } = useParams();
-    let topic = (slug !== "all") ? slug : undefined;
-    searchParams.set('topic', topic);
-    let sortByQuery = searchParams.get('sort_by');
+    let sortByQuery = searchParams.get('sorted_by');
     let orderQuery = searchParams.get('order');
     let topicQuery = searchParams.get('topic');
 
@@ -38,7 +35,7 @@ export default function ArticleManager ({ isLoading, setIsLoading, searchParams,
                     setIsLoading(false);
                     setError({ status: error.response.status, msg: error.response.data.msg });
                 });
-    }, [topicQuery, sortByQuery, orderQuery, setIsLoading, setFilterUpdated]);
+    }, [filterUpdated]);
 
 
     if (error) {
