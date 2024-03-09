@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export default function Navigation ({ searchParams, setSearchParams, setFilterUpdated }) {
 
 
-    ////TRYING TO FIX FILTER
+    //PARAMS FOR QUERIES
     const [sortedBy, setSortedBy] = useState(searchParams.get('sorted_by') || 'created_at');
     const [orderBy, setOrderBy] = useState(searchParams.get('order') || 'desc');
     const [topic, setTopic] = useState(searchParams.get('topic') || '');

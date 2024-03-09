@@ -3,7 +3,7 @@ import axios from 'axios';
 let baseURL = 'https://ncnews-lh66.onrender.com/api/'
 
 //////////////////////////////////////////////////////////////////
-export const getArticles = (article_id=undefined, topic=undefined, sort_by=undefined, order=undefined) => {
+export const getArticles = (article_id=undefined, topic=undefined, sorted_by=undefined, order=undefined) => {
 
     let fetchURL = baseURL + 'articles'
 
@@ -13,31 +13,25 @@ export const getArticles = (article_id=undefined, topic=undefined, sort_by=undef
     }
 
     //fetching multiple articles and allowing for queries...
-    let queryNames = ["topic", "sort_by", "order"];
-    let queries = [topic, sort_by, order]
+    let queryNames = ["topic", "sorted_by", "order"];
+    let queries = [topic, sorted_by, order]
 
     //loop throu queries array, if it is given (i.e. not undefined etc) then replace value with a string made of the value but formatted for the fetch URL
     for (let i=0; i<queries.length; i++) {
-        if (queries[i] !== undefined && queries[i] !== 'undefined' && queries[i] !== null) {
+        if (queries[i] !== undefined && queries[i] !== 'undefined' && queries[i] !== "" && queries[i] !== null) {
             queries[i] = `${queryNames[i]}=${queries[i]}`
         }
     }
 
-    //NOT SURE ABOUT THIS LINE??????IS IT NEEDED???
-    queries = queries.filter((item) => item !== undefined && item !== 'undefined' && item !== null)
+    //remove blank queries from queries array
+    queries = queries.filter((item) => item !== undefined && item !== "")
 
+    console.log(queries)
+    //if queries remain, append them to the fetch url with correct formatting
     if (queries.length > 0) {
         let queryStr = queries.join("&")
         fetchURL += '?' + queryStr
     }
-
-    /////////CANT QUERY TOPIC AND OTHER PARAMS AT SAME TIME DUE TO BACKEND BEHAVIOUR
-    ////WILL REFACTOR BACKEND TO ALLOW THIS FUNCTIONALITY
-    // if (topic !== undefined && topic !== 'undefined' && topic !== null) {
-    //     fetchURL = baseURL + `articles?topic=${topic}`
-    // }
-
-    
 
     return axios
     .get(fetchURL)
@@ -47,35 +41,10 @@ export const getArticles = (article_id=undefined, topic=undefined, sort_by=undef
             return response.data.article;
         //RETURN MANY ARTICLES
         } else {
-
-            console.log(response.data.articles)
-            
-        //SORTING HERE BECAUSE API ENDPOINT DOESN'T BEHAVE PROPERLY WITH LIVE DATA
-        //ALSO UNABLE TO COMBINE TOPIC AND SORT_BY/ORDER
-        //BACKEND TO BE REDRESSED
-
-            //SORT DESCENDING
-            // if (order === "desc" || order === null) {
-            //     if (sort_by !== null) {
-            //         response.data.articles.sort((a,b) => b[sort_by] - a[sort_by])
-            //     } else {
-            //         response.data.articles.sort((a,b) => b.created_at - a.created_at)
-            //     }
-            // } else {
-            // //SORT ASCENDING
-            //     if (sort_by !== null) {
-            //         response.data.articles.sort((a,b) => a[sort_by] - b[sort_by])
-            //     } else {
-            //         response.data.articles.sort((a,b) => a.created_at - b.created_at)
-            //     }
-            // }
-
             return response.data.articles;
         }
       }
     )
-    
-    //HAD TO REMOVE CATCH BLOCK AS ERROR WOULD NOT PASS UP TO CATCHS IN JSX -- WHY???
 
 }
 //////////////////////////////////////////////////////////////////
