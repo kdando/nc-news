@@ -4,6 +4,7 @@ import { useContext } from "react";
 //Context
 import { CurrentUserContext } from "./CurrentUser";
 
+
 export default function UserCard ({ user }) {
 
     //CONTEXT
@@ -24,17 +25,13 @@ export default function UserCard ({ user }) {
 
     return (
         username !== currentUsername ? (
-            <div className="media" onClick={handleUserSwitch}>
-                <p className="media-content media-left">{username}</p>
-                <p className="media-right is-32x32">
+            <div className="media mb-4 mt-4" onClick={handleUserSwitch}>
+                <strong className="media-content media-left">{username}</strong>
+                <figure className="media-right image is-64x64">
                     <img src={avatar_url} alt={username} />
-                </p>
+                </figure>
             </div>
         ) : null
     );
-    
-    
-    
-   
 
 }

@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { Routes, Route, Link, useSearchParams } from 'react-router-dom';
 
 //Components
-import Header from './components/Header'
 import Navigation from './components/Navigation'
 import ArticleManager from './components/ArticleManager'
 import ArticleFullCard from './components/ArticleFullCard'
@@ -26,22 +25,17 @@ const [searchParams, setSearchParams] = useSearchParams();
 
   return (
     <>
-      <header className="container is-fluid ">
-        <Link to={'/'}>
-        <Header />
-        </Link>
+      <header>
         <Navigation searchParams={searchParams} setSearchParams={setSearchParams} setFilterUpdated={setFilterUpdated} />
       </header>
-      <main className="container is-fluid">
-        <div className="columns is-centered">
-          <div className="column is-half">
+      <main className="container is-fluid columns is-centered">
+       
+          <div className="column is-two-fifths">
             <Routes>
 
               <Route path='/' element={<ArticleManager isLoading={isLoading} setIsLoading={setIsLoading}  searchParams={searchParams}  filterUpdated={filterUpdated} setFilterUpdated={setFilterUpdated} />} />
 
               <Route path='/articles/:article_id' element={<ArticleFullCard isLoading={isLoading} setIsLoading={setIsLoading} />} />
-
-              <Route path='/topics/:slug' element={<ArticleManager isLoading={isLoading} setIsLoading={setIsLoading} searchParams={searchParams}  filterUpdated={filterUpdated} setFilterUpdated={setFilterUpdated} />}/>
 
               <Route path='/switch-user' element={<SwitchUser isLoading={isLoading} setIsLoading={setIsLoading} />} />
 
@@ -49,7 +43,7 @@ const [searchParams, setSearchParams] = useSearchParams();
 
             </Routes>
           </div>
-        </div>
+        
       </main>
     </>
   )

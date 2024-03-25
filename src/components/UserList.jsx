@@ -1,4 +1,6 @@
+//Components
 import UserCard from './UserCard'
+
 
 export default function UserList ({ availableUsers }) {
 
