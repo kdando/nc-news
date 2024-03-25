@@ -1,9 +1,14 @@
 //React and Router part
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { CurrentUserContext } from './CurrentUser';
 
 
 export default function Navigation ({ searchParams, setSearchParams, setFilterUpdated }) {
+
+    //CONTEXT
+    const { currentUser } = useContext(CurrentUserContext)
+    const userFirstName = currentUser.name.split(" ")[0];
 
 
     //PARAMS FOR QUERIES
@@ -43,12 +48,12 @@ export default function Navigation ({ searchParams, setSearchParams, setFilterUp
 
     
     return (
-        <nav className="navbar" role="navigation" aria-label="main navigation">
+        <nav className="navbar p-20" role="navigation" aria-label="main navigation">
     
             {/* THE LOGO */}
             <div className="navbar-brand">
-                <Link to="/" className="navbar-item">
-                    <h1>KNC News</h1>
+                <Link to="/" className="navbar-item ml-2">
+                    <h1>NC News</h1>
                 </Link>
 
             {/* THE BURGER ICON FOR MOBILE VIEW */}
@@ -63,12 +68,12 @@ export default function Navigation ({ searchParams, setSearchParams, setFilterUp
             <div className={`navbar-menu ${isActive ? 'is-active' : ''}`}>
                 
             {/* THE START (LEFT SIDE) OF THE NAVBAR AND "HOME" LINK */}
-            <div className="navbar-start">
+            <div className="navbar-start navbar-center">
 
                 <Link to="/" className="navbar-item">Home</Link>
 
                 {/* THE TOPIC SELECTOR */}
-                <div className='navbar-item select'>
+                <div className='navbar-item select mt-2 mb-2'>
                     <select onChange={(event) => handleTopicChange(event.target.value)}>
                         <option value=''>All</option>
                         <option value='coding'>Coding</option>
@@ -78,7 +83,7 @@ export default function Navigation ({ searchParams, setSearchParams, setFilterUp
                 </div>
 
                 {/* THE SORT BY SELECTOR */}
-                <div className='navbar-item select'>
+                <div className='navbar-item select mt-2 mb-2'>
                     <select onChange={(event) => handleSortedByChange(event.target.value)}>
                         <option value='created_at'>Date</option>
                         <option value='comment_count'>Comments</option>
@@ -87,7 +92,7 @@ export default function Navigation ({ searchParams, setSearchParams, setFilterUp
                 </div>
 
                 {/* THE ORDER BY SELECTOR */}
-                <div className='navbar-item select'>
+                <div className='navbar-item select mt-2 mb-2'>
                     <select onChange={(event) => handleOrderChange(event.target.value)}>
                         <option value='desc'>Descending</option>
                         <option value='asc'>Ascending</option>
@@ -103,7 +108,8 @@ export default function Navigation ({ searchParams, setSearchParams, setFilterUp
 
             {/* THE END (RIGHT SIDE) OF NAVBAR - SWITCH USER LINK */}
             <div className='navbar-end'>
-                <Link to='/switch-user' className='navbar-item'>Switch User</Link>
+                <p className='navbar-item'>Welcome back, {userFirstName}!</p>
+                <Link to='/switch-user' className='navbar-item mr-2'>Switch User</Link>
             </div>
 
             </div>

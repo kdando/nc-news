@@ -26,22 +26,26 @@ export default function ArticlePreviewCard ({ article }) {
     return (
         <>
         <Link to={`/articles/${article_id}`}>
-        <div className='card mb-4 mt-4'>
-        <p className='card-header'>{title}</p>
-        <div className='card-image'>
-            <img src={article_img_url} />
-        </div>
-        <div className='card-content'>
-            posted by {author} on {parsedDate} in {topic}
-        </div>
-        <footer className='card-footer'>
-            <span className='card-footer-item'>
-                {votes} votes
-            </span>
-            <span className='card-footer-item'>
-                {comment_count} comments
-            </span>
-        </footer>
+        <div className='card mb-4 mt-5' >
+        <p className='card-header is-size-3 has-text-centered is-flex is-align-items-center is-justify-content-center is-wrap py-5'>{title}</p>
+
+            <div className="content is-flex is-justify-content-center card-image" >
+                <img src={article_img_url} />
+            </div>
+
+            <div className='card-content is-size-5 has-text-centered is-flex is-align-items-center is-justify-content-center is-wrap mb-2'>
+                posted by {author} on {parsedDate} in {topic}
+            </div>
+
+            <footer className='card-footer'>
+                <span className='card-footer-item'>
+                    {votes} votes
+                </span>
+                <span className='card-footer-item'>
+                    {comment_count} comments
+                </span>
+            </footer>
+
         </div>
         </Link>
         </>
