@@ -60,8 +60,8 @@ export default function AddComment ({ article_id, setCommentsChanged }) {
                 <>
                 <p>You are commenting as <strong>{currentUser.username}</strong></p>
                 <form onSubmit={handleFormSubmission}>
-                <textarea className='textarea' placeholder='e.g. This article changed my life...' value={userCommentInput} onChange={handleFormChange} required></textarea>
-                <button className="button is-primary" type='submit'>Submit</button>
+                <textarea className='textarea mt-3' placeholder='e.g. This article changed my life...' value={userCommentInput} onChange={handleFormChange} required></textarea>
+                <button className="button is-primary mt-3" type='submit'>Submit</button>
                 </form>
                 </>
                 )

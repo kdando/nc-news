@@ -27,7 +27,7 @@ export default function ArticlePreviewCard ({ article }) {
         <>
         <Link to={`/articles/${article_id}`}>
         <div className='card mb-4 mt-5' >
-        <p className='card-header is-size-3 has-text-centered is-flex is-align-items-center is-justify-content-center is-wrap py-5'>{title}</p>
+        <h2 className='card-header is-size-3 has-text-centered is-flex is-align-items-center is-justify-content-center is-wrap py-5'>{title}</h2>
 
             <div className="content is-flex is-justify-content-center card-image" >
                 <img src={article_img_url} />
