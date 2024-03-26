@@ -63,12 +63,12 @@ export default function ArticleFullCard ({ isLoading, setIsLoading }) {
             <Loading /> : 
             <>
             <article className="box">
-            <h2>{title}</h2>
+            <h2 className='is-size-3 has-text-centered is-flex is-align-items-center is-justify-content-center is-wrap py-5'>{title}</h2>
             <img src={article_img_url} alt={title} />
-            <h3>
+            <h3 className='has-text-centered is-flex is-align-items-center is-justify-content-center is-wrap p-3'>
             by {author}, posted {parsedDate} in {topic}
             </h3>
-            <p>{body}</p>
+            <p className='is-size-5 p-5'>{body}</p>
             </article>
             
             <AddVote article_id={article_id} votes={votes} />

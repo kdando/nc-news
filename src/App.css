@@ -1,21 +1,50 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
 
-/* my custom classes */
+/* my custom fonts */
+@font-face {
+  font-family: 'Typographica';
+  src: url('./assets/fonts/Typographica-Blp5.ttf') format('truetype'),
+}
 
+@font-face {
+  font-family: 'MinomuH';
+  src: url('./assets/fonts/MinomuHeavy-mL7d9.otf') format('otf'),
+}
+
+@font-face {
+  font-family: 'MinomuXB';
+  src: url('./assets/fonts/MinomuExtrabold-2OVx8.otf') format('otf'),
+}
+
+/* my custom colours */
 .vote-count {
   color: grey;
 }
-
 .vote-count.positive {
   color: green; 
 }
-
 .vote-count.negative {
   color: red; 
 }
 
+a:hover,
+a.is-active {
+    color: #64113F !important;
+}
+
+/* my custom classes */
 
 .fluid-text {font-size: calc(12px + (32 - 12) * ((100vw - 300px) / (1920 - 300))); line-height: 100%;}
+
+h1 {
+  font-family: 'MinomuH', sans-serif;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: 'MinomuXB', sans-serif;
+}
+
+
 
 
 /*VITES DEFAULT CSS BELOW*/

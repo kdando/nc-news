@@ -48,11 +48,11 @@ export default function Navigation ({ searchParams, setSearchParams, setFilterUp
 
     
     return (
-        <nav className="navbar p-20" role="navigation" aria-label="main navigation">
+        <nav className="navbar p-20 " role="navigation" aria-label="main navigation">
     
             {/* THE LOGO */}
             <div className="navbar-brand">
-                <Link to="/" className="navbar-item ml-2">
+                <Link to="/" className="navbar-item ml-2 is-size-2" >
                     <h1>NC News</h1>
                 </Link>
 
@@ -73,7 +73,7 @@ export default function Navigation ({ searchParams, setSearchParams, setFilterUp
                 <Link to="/" className="navbar-item">Home</Link>
 
                 {/* THE TOPIC SELECTOR */}
-                <div className='navbar-item select mt-2 mb-2'>
+                <div className='navbar-item select mt-4 mb-2'>
                     <select onChange={(event) => handleTopicChange(event.target.value)}>
                         <option value=''>All</option>
                         <option value='coding'>Coding</option>
@@ -83,7 +83,7 @@ export default function Navigation ({ searchParams, setSearchParams, setFilterUp
                 </div>
 
                 {/* THE SORT BY SELECTOR */}
-                <div className='navbar-item select mt-2 mb-2'>
+                <div className='navbar-item select mt-4 mb-2'>
                     <select onChange={(event) => handleSortedByChange(event.target.value)}>
                         <option value='created_at'>Date</option>
                         <option value='comment_count'>Comments</option>
@@ -92,7 +92,7 @@ export default function Navigation ({ searchParams, setSearchParams, setFilterUp
                 </div>
 
                 {/* THE ORDER BY SELECTOR */}
-                <div className='navbar-item select mt-2 mb-2'>
+                <div className='navbar-item select mt-4 mb-2'>
                     <select onChange={(event) => handleOrderChange(event.target.value)}>
                         <option value='desc'>Descending</option>
                         <option value='asc'>Ascending</option>
@@ -100,8 +100,8 @@ export default function Navigation ({ searchParams, setSearchParams, setFilterUp
                 </div>
 
                 {/* THE BUTTON TO APPLY SORT/ORDER */}
-                    <div className='navbar-item'>
-                        <button className='button' onClick={handleSubmit}>Filter</button>
+                    <div className='navbar-item mb-1'>
+                        <button className='button is-primary' onClick={handleSubmit}>Filter</button>
                     </div>
 
             </div>
