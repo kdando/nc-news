@@ -25,10 +25,10 @@ export default function UserCard ({ user }) {
 
     return (
         username !== currentUsername ? (
-            <div className="media mb-4 mt-4" onClick={handleUserSwitch}>
+            <div className="media mb-4 mt-4 is-flex is-align-items-center is-justify-content-center" onClick={handleUserSwitch} style={{height: '150px'}} >
                 <strong className="media-content media-left">{username}</strong>
                 <figure className="media-right image is-64x64">
-                    <img src={avatar_url} alt={username} />
+                    <img src={avatar_url} alt={username} style={{objectFit: 'cover'}}/>
                 </figure>
             </div>
         ) : null

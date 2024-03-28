@@ -41,7 +41,7 @@ export default function SwitchUser ({ isLoading, setIsLoading }) {
 
     return (
         <>
-        <p>You are currently logged in as {currentUser.username}</p>
+        <h1 className="mt-5">You are currently logged in as <strong>{currentUser.username}</strong>. Select new user below:</h1>
             {isLoading ? <Loading /> : <UserList availableUsers={availableUsers} />}
         </>
     );
